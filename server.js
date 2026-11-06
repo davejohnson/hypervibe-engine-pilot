@@ -73,7 +73,7 @@ http.createServer(async (req, res) => {
     const secret = process.env.SESSION_SECRET || '';
     const [db, cache] = await Promise.all([database(), redis(['INCR', 'health-checks'])]);
     const ok = secret.length >= 32 && (!db.configured || db.ok) && (!cache.configured || cache.ok);
-    return json(ok ? 200 : 500, { ok, secretPresent: secret.length > 0, database: db, redis: cache, release: version, code: 'b6' });
+    return json(ok ? 200 : 500, { ok, secretPresent: secret.length > 0, database: db, redis: cache, release: version, code: 'b7-ci' });
   }
   if (req.url === '/visits' && pool) { await pool.query('INSERT INTO visits DEFAULT VALUES'); return json(200, await database()); }
   if (req.url === '/queue') { try { return json(200, await queueRoundTrip()); } catch (error) { return json(500, { ok: false, error: String(error.message) }); } }
