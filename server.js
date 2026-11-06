@@ -21,7 +21,7 @@ http.createServer(async (req, res) => {
     const db = await database();
     const ok = secret.length >= 32 && (!db.configured || db.ok);
     res.writeHead(ok ? 200 : 500, { 'Content-Type': 'application/json' });
-    return res.end(JSON.stringify({ ok, secretPresent: secret.length > 0, database: db, release: version, code: 'b4' }));
+    return res.end(JSON.stringify({ ok, secretPresent: secret.length > 0, database: db, release: version, code: 'b5-local' }));
   }
   if (req.url === '/visits' && pool) {
     await pool.query('INSERT INTO visits DEFAULT VALUES');
